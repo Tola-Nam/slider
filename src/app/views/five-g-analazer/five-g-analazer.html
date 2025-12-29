@@ -1,0 +1,55 @@
+<div class="w-4/5 mx-auto py-12">
+  <div class="max-w-4xl mx-auto bg-white p-8 text-gray-900">
+
+    <div *ngFor="let section of sections; let i = index" class="mb-12 pb-8 border-b border-gray-200 last:border-b-0">
+
+      <!-- Section Title -->
+      <h2 class="text-2xl font-bold mb-4 text-gray-800">{{ section.title }}</h2>
+
+      <!-- Description -->
+      <p class="mb-4 text-gray-700 leading-relaxed" *ngIf="section.description">
+        {{ section.description }}
+      </p>
+
+      <!-- Show top two images ONLY for first section -->
+      <div *ngIf="section.showTopImages" class="flex flex-col md:flex-row gap-6 justify-center mb-6">
+        <img [src]="wifiAnalyzerImage" alt="WiFi Analyzer" class="w-full md:w-1/2 h-auto object-contain shadow-lg rounded-lg"/>
+        <img [src]="speedTestImage" alt="Speed Test" class="w-full md:w-1/2 h-auto object-contain shadow-lg rounded-lg"/>
+      </div>
+
+      <!-- Main Image for other sections -->
+      <div class="flex justify-center my-6" *ngIf="section.image">
+        <img [src]="section.image" [alt]="section.title" class="w-full max-w-3xl h-auto object-contain shadow-lg rounded-lg"/>
+      </div>
+
+      <!-- Bullets -->
+      <ul *ngIf="section.bullets" class="list-disc pl-6 space-y-3 mb-6 text-gray-700">
+        <li *ngFor="let item of section.bullets" class="leading-relaxed">{{ item }}</li>
+      </ul>
+
+      <!-- Impacts Section -->
+      <div *ngIf="section.impacts" class="mt-6 bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+        <h3 class="text-xl font-bold mb-3 text-yellow-800">{{ section.impacts.title }}</h3>
+        <ul class="list-disc pl-6 space-y-2">
+          <li *ngFor="let impact of section.impacts.items" class="text-gray-700">{{ impact }}</li>
+        </ul>
+      </div>
+    </div>
+    <p class="relative start-4 bg-green-500 rounded-lg p-4">ការវិភាគដោយប្រើ WiFi Analyzer បង្ហាញថាបណ្ដាញឥតខ្សែនៅបន្ទប់209មាន
+      Interference និង Overlapping ខ្លាំងនៅលើប្រេកង់ 2.4GHz ដែលបណ្តាលឲ្យប្រសិទ្ធភាព
+      បណ្ដាញមិនស្ថេរភាព។ ខណៈដែលប្រេកង់ 5GHz មានការរំខានតិចនិងស្ថេរភាពល្អជាង។ ដូច្នេះ
+      ការប្រើប្រាស់ 5 GHz និងការគ្រប់គ្រងឆានែលឲ្យសមស្របអាចជួយកែលម្អគុណភាពបណ្ដាញឥត
+      ខ្សែបានយ៉ាងមានប្រសិទ្ធភាព។
+      </p>
+     <div class="w-4/5 mx-auto flex justify-between px-2 py-4">
+    <a (click)="goToRoute('/analizse')" routerLinkActive="active" class="text-blue-500 hover:pointer">
+      Previous Page
+      </a>
+    <a (click)="goToRoute('/testperfomence')" routerLinkActive="active" class="text-blue-500 hover:pointer">
+      Next Page
+    </a>
+  </div>
+  <p class="text-center">4</p>
+
+  </div>
+</div>

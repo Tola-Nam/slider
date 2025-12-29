@@ -1,0 +1,137 @@
+<!-- Bottom Left -->
+<div class="fixed top-0 left-0 m-4 z-10">
+  <app-scanner-loading></app-scanner-loading>
+</div>
+
+<!-- Bottom Right -->
+<div class="fixed top-0 right-0 m-4 z-10">
+  <app-scanner-loading></app-scanner-loading>
+</div>
+<main class="min-h-screen bg-gradient-to-b from-slate-50 via-gray-200 to-slate-200 flex justify-center py-5">  
+  <div class="w-full max-w-[794px] px-4 animate-scale-in">
+    <div class="animated-border bg-gray-200 rounded-lg p-10 text-center text-black font-serif shadow-2xl relative overflow-hidden">
+      
+      <!-- Shimmer Effect -->
+      <div class="absolute top-0 left-0 w-full h-full pointer-events-none animate-shimmer"
+           style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); background-size: 200% 100%;"></div>
+
+      <!-- University Name -->
+      <h1 class="text-xl font-bold mb-2 text-gray-900 animate-fade-in-up delay-1">
+        {{ coverPageData().countryName }}
+      </h1>
+      <h2 class="text-lg font-bold mb-1 text-gray-700 animate-fade-in-up delay-2">
+        {{ coverPageData().motto }}
+      </h2>
+      
+
+      <h3 class="text-lg font-bold mt-2 text-gray-700 animate-fade-in-up delay-3">
+        {{ coverPageData().faculty }}
+      </h3>
+
+      <div class="flex flex-col items-center mb-6 mt-0 animate-scale-in delay-4 relative right-60 w-170">
+
+        <!-- Department & Instructor FIRST -->
+        <img
+          [src]="coverPageData().logo"
+          alt="RUPP Logo"
+          class="w-20 h-20 object-contain drop-shadow-lg relative right-10 transition-transform duration-300 hover:scale-110 hover:rotate-6 mb-3"
+        />
+
+        <!-- University -->
+        <div class="flex">
+
+          <div class="flex flex-col items-center text-center">
+            <p class="text-lg font-bold text-gray-900 leading-tight relative left-25">
+              {{ coverPageData().university_khmer }}
+              </p>
+              
+              <p class="mt-1 font-semibold text-sm text-gray-600 relative left-25">
+                {{ coverPageData().university_eng }}
+              </p>
+          </div>
+          <div class="text-end mb-3">
+            <h4 class="relative left-25 text-lg font-bold text-gray-800 animate-fade-in-up delay-3"> 
+              {{ coverPageData().department_kh }}
+            </h4>
+            
+            <h5 class=" relative left-40 text-lg font-bold text-gray-800 animate-fade-in-up delay-3"> 
+              {{ coverPageData().department_eng }}
+            </h5>
+            
+            <p class=" relative left-35 text-sm font-semibold text-blue-700 animate-fade-in-up delay-3">
+              ណែនាំដោយ ៖ {{ coverPageData().dr }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course -->
+      <p class="mt-0 text-sm animate-fade-in-up delay-5 relative bottom-5">
+        មុខវិជ្ជា : <span class="font-semibold">{{ coverPageData().course }}</span>
+      </p>
+
+      <!-- Assignment -->
+      <p class="mt-4 font-semibold text-base text-gray-700 animate-fade-in-up delay-5 relative bottom-5">
+        {{ coverPageData().assignment }}
+      </p>
+
+      <!-- Student Info Grid 1 -->
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm animate-fade-in-up delay-6">
+        <p class="p-2 font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+          ធ្វើឡើងដោយនិស្សិតថ្នាក់ : {{ coverPageData().grade }}
+        </p>
+       <p class="p-2 font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+          ក្រុមទី : {{ coverPageData().group }}
+        </p>
+
+        <p class="p-2 font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+          ឆ្នាំទី : {{ coverPageData().year }}
+        </p>
+
+        <p class="p-2 font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+          ឆ្នាំសិក្សា : {{ coverPageData().academicYear }} 
+        </p>
+        <p class="p-2 font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+          សមាជិក : {{ coverPageData().memberCount }}
+        </p>
+          <p class="p-2 font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+          បន្ទប់ : {{ coverPageData().room }}
+        </p>
+        <p class="p-2 font-semibold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+          ថ្ងៃទី : {{ coverPageData().day }}
+        </p>
+      </div>
+
+      <!-- Students Table -->
+      <div class="mt-8 border-1 border-gray-700 rounded-lg p-4 bg-gradient-to-br from-gray-50 to-gray-100 shadow-inner animate-fade-in-up delay-7">
+        <h4 class="font-bold mb-3 text-base text-gray-900 underline decoration-blue-500 underline-offset-4">
+          សមាជិកក្រុម
+        </h4>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
+          <p
+            *ngFor="let member of members; let i = index"
+            [ngClass]="{
+              'bg-green-100 text-green-800': i === 0
+            }"
+            class="p-2 rounded transition-all duration-300 hover:translate-x-1 hover:font-semibold"
+          >
+            # {{ i + 1 }}. {{ member.name }} - No {{ member.id }}
+          </p>
+        </div>
+      </div>
+      <a (click)="goToRoute('/slide-show')" class="relative left-75">Next Page</a>
+      <p>1</p>
+    </div>
+  </div>
+</main>  
+
+<!-- Bottom Left -->
+<div class="fixed bottom-0 left-0 m-4 z-10">
+  <app-loading></app-loading>
+</div>
+
+<!-- Bottom Right -->
+<div class="fixed bottom-0 right-0 m-4 z-10">
+  <app-loading></app-loading>
+</div>
