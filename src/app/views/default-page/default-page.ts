@@ -2,13 +2,17 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
+import { Loading } from '../loading/loading';
+import { ScannerLoading } from '../scanner-loading/scanner-loading';
 interface CoverPageData {
   logo: string;
   countryName: string;
   motto: string;
   faculty: string;
-  university: string;
-  department: string;
+  university_eng: string;
+  university_khmer : string;
+  department_eng: string;
+  department_kh: string;
   course: string;
   assignment: string;
   group: string;
@@ -19,6 +23,7 @@ interface CoverPageData {
   academicYear: string;
   members: string[];
   grade: string;
+  dr : string;
 }
 
 
@@ -28,14 +33,13 @@ interface Member {
 }
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule,RouterOutlet],
-  templateUrl: './app.html',
-  styleUrls: ['./app.scss']
+  selector: 'app-default-page',
+  imports: [CommonModule,RouterOutlet,Loading,ScannerLoading],
+  templateUrl: './default-page.html',
+  styleUrl: './default-page.scss',
 })
-export class App {
- constructor(private router: Router) {}
+export class DefaultPage {
+   constructor(private router: Router) {}
 
   protected readonly title = signal('RUPP Cover Page');
   protected readonly coverPageData = signal<CoverPageData>({
@@ -43,8 +47,11 @@ export class App {
     countryName: 'ព្រះរាជាណាចក្រកម្ពុជា',
     motto: 'ជាតិ សាសនា ព្រះមហាក្សត្រ',
     faculty: 'Faculty of Science',
-    university: 'Royal University of Phnom Penh',
-    department: 'Department of Computer Science',
+    university_eng: 'Royal University of Phnom Penh',
+    university_khmer:'សាកល វិទ្យាល័យ ភូមិន្ទភ្នំពេញ',
+    department_eng: 'Department of Computer Science',
+    department_kh: 'ដេប៉ាតេម៉ង់​ ៖​ ព័ត៍មានវិទ្យា',
+    dr : 'សាស្ត្រាចារ្យរង​ បណ្ឌិត អ៊ុក ឃាន',
     course: 'Computer Network',
     assignment: 'Assignment Case Study On RUPP Wireless',
     grade: 'E2',
@@ -82,11 +89,10 @@ export class App {
   ];
 
 
-   goToRoute(uri_route : string): void {
-    this.router
-      .navigate([uri_route])
-      .then(() => {
-        window.scrollTo(0, 0);
-    });
+  goToRoute(uri_route: string) {
+    this.router.navigate([uri_route])
+      .then(() => window.scrollTo(0, 0))
+      .catch(err => console.error('Navigation Error:', err));
   }
+
 }
